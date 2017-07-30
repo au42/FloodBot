@@ -12,5 +12,10 @@
 
 #define SOAK_SEC 5
 
+/// @brief Initialize pump pins
+/// @return True if opening files was successful
 extern void init_pump_pins();
-extern void exec_water_core();
+
+/// @brief Run the full water cycle for watering
+/// @return True if opening files was successful
+extern void exec_water_loop();

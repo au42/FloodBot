@@ -2,13 +2,13 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define SHOW_ON_CONSOLE
+#define LOG_FILE_PATH "~/Documents/bonsai_log.txt"
+#define DATA_FILE_PATH "~/Documents/bonsai_data.csv"
 
+/// @brief Open the log files as defined for writing
+/// @return True if opening files was successful
 extern bool init_log_file();
+
+/// @brief Close the log files
+/// @return True if closing files was successful
 extern bool close_log_file();
-extern void append_message_to_log(char* str);
-extern void append_error_to_log(char* str);
-void append_pump_duration_log(int start_seconds, int stop_seconds);
-void append_siphon_duration_log(int start_seconds, int stop_seconds);
-void insert_timestamp_return_to_log();
-extern int seconds_since_last_pump();

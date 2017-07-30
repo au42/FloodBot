@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "time.h": "c",
+        "wiringpi.h": "c",
+        "stdio.h": "c",
+        "libio.h": "c",
+        "cmakecxxcompilerid.cpp": "c",
+        "feature_tests.cxx": "c",
+        "file_process.c": "cpp"
+    }
+}
