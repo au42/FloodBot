@@ -22,14 +22,13 @@ void init_pump_pins(){
 /// @param cycles The number of cycles to run the siphon pump
 /// Toggle the spray pump via relay a given number of cycles
 /// with a predefined duty cycle and duration
-void run_spray_op(int cycles){
+void* run_spray_op(void* cycles_ptr){
+
+	int cycles = (int)cycles_ptr;
 	
 	struct timespec start_time, stop_time;
-		
-	// save start time
 	timespec_get(&start_time, TIME_UTC);
-		
-	// run the pump cycles	
+			
 	for (int i = 0; i<cycles;i++){
 
 		digitalWrite (PUMP_PIN, LOW);
@@ -38,22 +37,22 @@ void run_spray_op(int cycles){
 
 		if (i < cycles-1){ sleep(SPRAY_OFF_SEC); }
 	}
-		
-	// save end time
+
 	timespec_get(&stop_time, TIME_UTC);
+
+	return NULL;
 }
 
 /// @param cycles The number of cycles to run the siphon pump
 /// Toggle the siphon pump via relay a given number of cycles
 /// with a predefined duty cycle and duration
-void run_siphon_op(int cycles){
+void* run_siphon_op(void* cycles_ptr){
 	
 	struct timespec start_time, stop_time;
 		
-	// save start time
 	timespec_get(&start_time, TIME_UTC);
 	
-	// run siphon pump cycles
+	int cycles = (int) cycles_ptr;
 	for (int i = 0; i<cycles;i++){
 
 		digitalWrite (SIPHON_PIN, LOW);
@@ -65,15 +64,21 @@ void run_siphon_op(int cycles){
 			
 	timespec_get(&stop_time, TIME_UTC);
 	
+	return NULL;
 }
 
 /// Run the full water loop cycle
 void exec_water_loop(){
 	
-	run_spray_op(CYCLE_LOOPS);
+	// Spray water the defined amount of cycles
+	int cycles = CYCLE_LOOPS;
+	run_spray_op(&cycles);
 
+	// Complicated soak operation
 	sleep(SOAK_SEC);
 
-	run_siphon_op(SIPHON_LOOPS);
+	// Run the spihon op after we let the bonsai soak
+	cycles = SIPHON_LOOPS;
+	run_siphon_op(&cycles);
 
 }

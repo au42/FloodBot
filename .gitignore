@@ -1,3 +1,9 @@
 GRTAGS
 GPATH
 GTAGS
+CMakeFiles/*
+Makefile
+floodbot
+CMakeCache.txt
+cmake_install.cmake
+.vscode/tasks.json

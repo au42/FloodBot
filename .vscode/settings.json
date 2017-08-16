@@ -7,6 +7,8 @@
         "cmakecxxcompilerid.cpp": "c",
         "feature_tests.cxx": "c",
         "file_process.c": "c",
-        "pump_controller.h": "c"
+        "pump_controller.h": "c",
+        "libconfig.h": "c",
+        "stdlib.h": "c"
     }
 }
