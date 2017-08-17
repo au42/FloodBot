@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define LOG_FILE_PATH "~/Documents/bonsai_log.txt"
-#define DATA_FILE_PATH "~/Documents/bonsai_data.csv"
+#define LOG_FILE_NAME "floodbot_log.txt"
+#define DATA_FILE_NAME "floodbot_data.csv"
 
 /// @brief Open the log files as defined for writing
 /// @return True if opening files was successful

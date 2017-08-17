@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 GRTAGS
 GPATH
 GTAGS
@@ -7,3 +8,10 @@ floodbot
 CMakeCache.txt
 cmake_install.cmake
 .vscode/tasks.json
+=======
+floodbot
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles/*
+>>>>>>> 89594f7feb2f3d1cab26ee1171581e7bd1965447

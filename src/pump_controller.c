@@ -11,7 +11,7 @@
 void init_pump_pins(){
 
 	wiringPiSetup();
-		
+	
 	pinMode (PUMP_PIN, OUTPUT) ;
 	pinMode (SIPHON_PIN, OUTPUT) ;
 
@@ -24,7 +24,7 @@ void init_pump_pins(){
 /// with a predefined duty cycle and duration
 void* run_spray_op(void* cycles_ptr){
 
-	int cycles = (int)cycles_ptr;
+	int const cycles = *((int*)cycles_ptr);
 	
 	struct timespec start_time, stop_time;
 	timespec_get(&start_time, TIME_UTC);
@@ -34,6 +34,12 @@ void* run_spray_op(void* cycles_ptr){
 		digitalWrite (PUMP_PIN, LOW);
 		sleep(SPRAY_ON_SEC);
 		digitalWrite (PUMP_PIN, HIGH);
+		
+		printf("Spray cycle complete: ");
+		printf("%d",(i+1));
+		printf(" of ");
+		printf("%d", cycles);
+		printf("\n");
 
 		if (i < cycles-1){ sleep(SPRAY_OFF_SEC); }
 	}
@@ -52,12 +58,19 @@ void* run_siphon_op(void* cycles_ptr){
 		
 	timespec_get(&start_time, TIME_UTC);
 	
-	int cycles = (int) cycles_ptr;
+	int const cycles = *((int*)cycles_ptr);
+
 	for (int i = 0; i<cycles;i++){
 
 		digitalWrite (SIPHON_PIN, LOW);
 		sleep(SIPHON_ON_SEC);
 		digitalWrite (SIPHON_PIN, HIGH);
+
+		printf("Siphon cycle complete: ");
+		printf("%d", (i+1));
+		printf(" of ");
+		printf("%d", cycles);
+		printf("\n");
 
 		if (i < cycles-1){ sleep(SIPHON_OFF_SEC); }
 	}

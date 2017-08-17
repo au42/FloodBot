@@ -7,8 +7,8 @@
 #define SPRAY_ON_SEC 8
 #define SPRAY_OFF_SEC 16
 
-#define SIPHON_ON_SEC 6
-#define SIPHON_OFF_SEC 18
+#define SIPHON_ON_SEC 4
+#define SIPHON_OFF_SEC 10
 
 #define SOAK_SEC 5
 

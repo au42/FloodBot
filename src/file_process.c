@@ -23,14 +23,21 @@ bool init_log_file(){
 	}
 	
 	// Open files for use
-	log_file_pointer = fopen(LOG_FILE_PATH,"a+");
-	data_file_pointer = fopen(DATA_FILE_PATH,"a+");
+	log_file_pointer = fopen(LOG_FILE_NAME,"a");
+	data_file_pointer = fopen(DATA_FILE_NAME,"a");
 	
 	// Files opened ok?
-	if (log_file_pointer == NULL || data_file_pointer == NULL) {
-		fprintf(stderr,"Can't open either file for writing.\n");
-		return false;
-	}	
+	if ( log_file_pointer == NULL ) {
+		fprintf(stderr,"Can't open the log file for writing - actions will not be logged!\n");
+	} else {
+		printf("Log file OK!");
+	}
+
+	if ( data_file_pointer == NULL ) {
+		fprintf(stderr,"Can't open the data file for writing - data will not be logged!\n");
+	} else {
+		printf("Data file OK!");
+	}
 
 	return true;
 }
@@ -49,79 +56,5 @@ bool close_log_file(){
 	
 	return true;
 }
-
-
-
-
-// void append_message_to_log(char* str){	
-	
-// 	if (log_file_pointer == NULL){
-// 		fprintf(stderr,"I couldn't write to a null file handle.\n");
-// 		return;
-// 	}
-	
-// 	// char* tag = "MSG,";
-// 	// fwrite(tag, strlen(tag), 1, log_file_pointer);
-// 	// fwrite(str, strlen(str), 1, log_file_pointer);
-// 	// insert_timestamp_return_to_log();
-	
-// 	fflush(log_file_pointer);
-// }
-
-
-// void append_error_to_log(char* str){	
-	
-// 	if (log_file_pointer == NULL){
-// 		fprintf(stderr,"I couldn't write to a null file handle.\n");
-// 		return;
-// 	}
-	
-// 	// char* tag = "ERR,";
-// 	// fwrite(tag, strlen(tag), 1, log_file_pointer);
-// 	// fwrite(str, strlen(str), 1, log_file_pointer);
-// 	// insert_timestamp_return_to_log();
-	
-// 	fflush(log_file_pointer);
-// }
-
-
-// void append_pump_duration_log(int start_seconds, int stop_seconds){
-
-// 	if (log_file_pointer == NULL){
-// 		fprintf(stderr,"I couldn't write to a null file handle.\n");
-// 		return;
-// 	}
-
-// 	//fprintf(log_file_pointer,"PUMP,%i,%i", start_seconds, stop_seconds);
-// 	//insert_timestamp_return_to_log();
-	
-// 	fflush(log_file_pointer);
-// }
-
-
-// void append_siphon_duration_log(int start_seconds, int stop_seconds){
-
-// 	if (log_file_pointer == NULL){
-// 		fprintf(stderr,"I couldn't write to a null file handle.\n");
-// 		return;
-// 	}
-
-// 	//fprintf(log_file_pointer,"SIPHON,%i,%i", start_seconds, stop_seconds);
-// 	//insert_timestamp_return_to_log();
-	
-// 	fflush(log_file_pointer);
-// }
-
-
-//void insert_timestamp_return_to_log(){
-	
-	//struct timespec gettime_now;
-	//timespec_get(&gettime_now, TIME_UTC);
-	
-	//fprintf(log_file_pointer,", %i UTC\r\n", (int)(gettime_now.tv_sec));
-	
-	//fflush(log_file_pointer);
-//}
-
 
 

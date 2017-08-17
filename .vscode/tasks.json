@@ -9,7 +9,7 @@
             "type": "shell",
             "presentation": {
                 "reveal": "always",
-                "panel": "shared"
+                "panel": "new"
             },
             "group": {
                 "kind": "build",
@@ -25,7 +25,7 @@
             "type": "shell",
             "presentation": {
                 "reveal": "always",
-                "panel": "shared"
+                "panel": "new"
             },
             "problemMatcher": []
         }

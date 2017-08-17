@@ -4,6 +4,7 @@ project (floodbot)
 
 set (WPI_PATH /home/alex/Development/wiringPi/wiringPi)
 set (LIBCONF_PATH /home/alex/Development/libconfig/lib)
+set (LIB_PATH /home/alex/Development/raspberrypi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/lib)
 
 include_directories (include)
 include_directories (${WPI_PATH})
@@ -14,8 +15,8 @@ if(NOT WPI_LIB)
   message(FATAL_ERROR "wiringPi library not found")
 endif()
 
-find_library(LIBCONF_PATH libconfig HINTS ${LIBCONF_PATH} NO_CMAKE_FIND_ROOT_PATH)
-if(NOT LIBCONF_PATH)
+find_library(LIBCONF_LIB NAMES libconfig.so PATHS ${LIB_PATH})
+if(NOT LIBCONF_LIB)
   message(FATAL_ERROR "libconfig library not found")
 endif()
 
@@ -23,6 +24,6 @@ FILE(GLOB SRC_FILES src/*.c)
 add_executable(floodbot ${SRC_FILES})
 
 
-target_link_libraries(floodbot ${WPI_LIB})
+target_link_libraries(floodbot ${WPI_LIB} ${LIBCONF_LIB})
 
 
