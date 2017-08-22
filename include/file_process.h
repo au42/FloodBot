@@ -12,3 +12,11 @@ extern bool init_log_file();
 /// @brief Close the log files
 /// @return True if closing files was successful
 extern bool close_log_file();
+
+extern bool record_spray_data(struct timespec start_time,struct timespec stop_time);
+
+extern bool record_siphon_data(struct timespec start_time,struct timespec stop_time);
+
+extern bool record_start_data(struct timespec start_time);
+
+extern bool record_end_data(struct timespec start_time);

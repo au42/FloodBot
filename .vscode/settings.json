@@ -9,6 +9,7 @@
         "file_process.c": "c",
         "pump_controller.h": "c",
         "libconfig.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "pthread.h": "c"
     }
 }

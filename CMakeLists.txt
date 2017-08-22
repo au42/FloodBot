@@ -1,5 +1,9 @@
 cmake_minimum_required (VERSION 3.0)
 
+# Have CMake find our pthreads library within our toolchain (required for this library)
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+
+
 project (floodbot)
 
 set (WPI_PATH /home/alex/Development/wiringPi/wiringPi)
@@ -22,8 +26,8 @@ endif()
 
 FILE(GLOB SRC_FILES src/*.c)
 add_executable(floodbot ${SRC_FILES})
+find_package(Threads REQUIRED)
 
-
-target_link_libraries(floodbot ${WPI_LIB} ${LIBCONF_LIB})
+target_link_libraries(floodbot ${WPI_LIB} ${LIBCONF_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 

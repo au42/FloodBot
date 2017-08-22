@@ -8,8 +8,6 @@
 
 #include "file_process.h"
 
-
-
 FILE *log_file_pointer;
 FILE *data_file_pointer;
 
@@ -30,18 +28,17 @@ bool init_log_file(){
 	if ( log_file_pointer == NULL ) {
 		fprintf(stderr,"Can't open the log file for writing - actions will not be logged!\n");
 	} else {
-		printf("Log file OK!");
+		printf("Log file OK!\n");
 	}
 
 	if ( data_file_pointer == NULL ) {
 		fprintf(stderr,"Can't open the data file for writing - data will not be logged!\n");
 	} else {
-		printf("Data file OK!");
+		printf("Data file OK!\n");
 	}
 
 	return true;
 }
-
 
 bool close_log_file(){
 	
@@ -58,3 +55,69 @@ bool close_log_file(){
 }
 
 
+bool record_spray_data(struct timespec start_time,struct timespec stop_time) {
+
+	if (data_file_pointer == NULL){	return false; }
+
+	char data_str[128];
+	char starttime_str[128];
+	int t_seconds = (int)stop_time.tv_sec - (int)start_time.tv_sec;
+
+	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
+	snprintf(data_str,127,"%s,SPRAY,%i",starttime_str,t_seconds);
+
+	fprintf(data_file_pointer,"%s\n",data_str);
+	fflush(stdout);
+
+	return true;
+}
+
+bool record_siphon_data(struct timespec start_time, struct timespec stop_time) {
+
+	if (data_file_pointer == NULL){	return false; }
+
+	char data_str[128];
+	char starttime_str[128];
+	int t_seconds = (int)stop_time.tv_sec - (int)start_time.tv_sec;
+
+	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
+	snprintf(data_str,127,"%s,SIPHON,%i",starttime_str,t_seconds);
+
+	fprintf(data_file_pointer,"%s\n",data_str);
+	fflush(stdout);
+
+	return true;
+	
+}
+
+bool record_start_data(struct timespec start_time) {
+
+	if (data_file_pointer == NULL){	return false; }
+
+	char data_str[128];
+	char starttime_str[128];
+
+	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
+	snprintf(data_str,127,"%s,START",starttime_str);
+
+	fprintf(data_file_pointer,"%s\n",data_str);
+	fflush(stdout);
+
+	return true;
+}
+
+bool record_end_data(struct timespec end_time) {
+
+	if (data_file_pointer == NULL){	return false; }
+
+	char data_str[128];
+	char endtime_str[128];
+
+	snprintf(endtime_str,127,"%lld.%.9ld", (long long)end_time.tv_sec, end_time.tv_nsec);
+	snprintf(data_str,127,"%s,END",endtime_str);
+
+	fprintf(data_file_pointer,"%s\n",data_str);
+	fflush(stdout);
+
+	return true;
+}
