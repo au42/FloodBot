@@ -3,6 +3,8 @@
  #include "file_process.h"
  #include "pump_controller.h"
  #include "config_module.h"
+ #include "camera_threads.h"
+ #include "thread_director.h"
 
 int main (void)
 {
@@ -17,20 +19,17 @@ int main (void)
 	timespec_get(&start_time, TIME_UTC);
 	record_start_data(start_time);
 
-	// Step 3: Init sensor and cameras
-
 	// Step 4: Ping for internet access & Setup web API (new thread and will signal when done)
 	
-	// Step 5: Run water & sensor operations (new thread and will signal when done)
-	exec_water_loop_threads();
+	// Step 5: Run full floodbot process by starting necessary threads
+	start_threaded_process();
 
-	// Step 6: Save results to cloud and files
+	// Step 6: Save results to files that will be later sync'd
 	timespec_get(&end_time, TIME_UTC);
 	record_end_data(end_time);
 
 	// Step 7: Close and safe shutdown
 	close_log_file();
-
 	
   return 0 ;
 } 

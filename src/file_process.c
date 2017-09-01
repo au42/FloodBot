@@ -63,7 +63,15 @@ bool record_spray_data(struct timespec start_time,struct timespec stop_time) {
 	char starttime_str[128];
 	int t_seconds = (int)stop_time.tv_sec - (int)start_time.tv_sec;
 
-	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
+	// Get the time for the file name
+    time_t rawtime;
+    struct tm *time_info;
+
+	rawtime = start_time.tv_sec;
+    time_info = localtime( &rawtime );
+
+    strftime(starttime_str,80,"%x - %I:%M%p", time_info);
+
 	snprintf(data_str,127,"%s,SPRAY,%i",starttime_str,t_seconds);
 
 	fprintf(data_file_pointer,"%s\n",data_str);
@@ -80,7 +88,15 @@ bool record_siphon_data(struct timespec start_time, struct timespec stop_time) {
 	char starttime_str[128];
 	int t_seconds = (int)stop_time.tv_sec - (int)start_time.tv_sec;
 
-	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
+	// Get the time for the file name
+    time_t rawtime;
+    struct tm *time_info;
+
+	rawtime = start_time.tv_sec;
+    time_info = localtime( &rawtime );
+
+    strftime(starttime_str,80,"%x - %I:%M%p", time_info);
+
 	snprintf(data_str,127,"%s,SIPHON,%i",starttime_str,t_seconds);
 
 	fprintf(data_file_pointer,"%s\n",data_str);
@@ -95,10 +111,18 @@ bool record_start_data(struct timespec start_time) {
 	if (data_file_pointer == NULL){	return false; }
 
 	char data_str[128];
-	char starttime_str[128];
+	char time_str[128];
 
-	snprintf(starttime_str,127,"%lld.%.9ld", (long long)start_time.tv_sec, start_time.tv_nsec);
-	snprintf(data_str,127,"%s,START",starttime_str);
+	// Get the time for the file name
+    time_t rawtime;
+    struct tm *time_info;
+
+	rawtime = start_time.tv_sec;
+    time_info = localtime( &rawtime );
+
+    strftime(time_str,80,"%x - %I:%M%p", time_info);
+
+	snprintf(data_str,127,"%s,START",time_str);
 
 	fprintf(data_file_pointer,"%s\n",data_str);
 	fflush(stdout);
@@ -111,10 +135,17 @@ bool record_end_data(struct timespec end_time) {
 	if (data_file_pointer == NULL){	return false; }
 
 	char data_str[128];
-	char endtime_str[128];
+	char time_str[128];
 
-	snprintf(endtime_str,127,"%lld.%.9ld", (long long)end_time.tv_sec, end_time.tv_nsec);
-	snprintf(data_str,127,"%s,END",endtime_str);
+	// Get the time for the file name
+    time_t rawtime;
+    struct tm *time_info;
+
+	rawtime = end_time.tv_sec;
+    time_info = localtime( &rawtime );
+
+    strftime(time_str,80,"%x - %I:%M%p", time_info);
+	snprintf(data_str,127,"%s,END",time_str);
 
 	fprintf(data_file_pointer,"%s\n",data_str);
 	fflush(stdout);

@@ -10,6 +10,9 @@
         "pump_controller.h": "c",
         "libconfig.h": "c",
         "stdlib.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "unistd.h": "c",
+        "pump_threads.h": "c",
+        "camera_threads.h": "c"
     }
 }
