@@ -7,7 +7,6 @@
 #include <pthread.h>
 #include "camera_threads.h"
 
-
 void* launch_camera_exec(void * args) {
 
     // Get the time for the file name

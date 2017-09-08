@@ -9,18 +9,18 @@
 int main (void)
 {
 	// Step 1: Load settings and breadcrumbs
-	//m_config_init();
-	
-	// Step 2: Setup both files for logging (new thread and will signal when done)
+	//m_config_init(); // TODO: No config needed right now, but will be useful later
 	init_log_file();
 	init_pump_pins();
-
+	
+	// Step 2: Mark start in data log
 	struct timespec start_time, end_time;	
 	timespec_get(&start_time, TIME_UTC);
 	record_start_data(start_time);
 
 	// Step 4: Ping for internet access & Setup web API (new thread and will signal when done)
-	
+	// TODO: This can come later, but for now we'll use cron jobs and rsync to keep a FTP directory updated
+
 	// Step 5: Run full floodbot process by starting necessary threads
 	start_threaded_process();
 
